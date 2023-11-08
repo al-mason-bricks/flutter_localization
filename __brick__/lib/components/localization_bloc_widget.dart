@@ -4,12 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/localization/localization_cubit.dart';
 
 class LocalizationBlocWidget extends StatelessWidget {
-  const LocalizationBlocWidget(
-      {super.key, required this.onLocalChanged, required this.child});
+  const LocalizationBlocWidget({super.key, required this.builder});
 
-  final Function(Locale locale) onLocalChanged;
-
-  final Widget child;
+  final Function(Locale locale) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +18,8 @@ class LocalizationBlocWidget extends StatelessWidget {
           //FIXME:: change loading widget to something better
           return const Text('Fetching localization...');
         }
-        onLocalChanged(state.locale);
-        return child;
+
+        return builder(state.locale);
       }),
     );
   }
